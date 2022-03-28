@@ -3,9 +3,15 @@ const bodyParser = require("body-parser");
 const app = express();
 const routes = require("./routes");
 const dbo = require("./config/conn");
-
 require("dotenv").config();
+var cors = require('cors')
 
+
+var corsOptions = {
+    origin: 'http://localhost:3001',
+    optionsSuccessStatus: 200 // For legacy browser support
+}
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
