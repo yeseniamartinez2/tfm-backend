@@ -4,9 +4,9 @@ const { petService } = require("../services");
  * call other imported services, or same service but different functions here if you need to
  */
 const postPet = async (req, res, next) => {
-    const { name, species, gender } = req.body;
+    const { name, dob, species, gender, filename, kids_comp, pets_comp, description } = req.body;
     try {
-        await petService.createPet(name, species, gender);
+        await petService.createPet(name, dob, species, gender, filename, kids_comp, pets_comp, description);
         // other service call (or same service, different function can go here)
         // i.e. - await generateBlogpostPreview()
         res.sendStatus(201);
@@ -52,9 +52,23 @@ const deletePetById = async (req, res, next) => {
     }
 };
 
+const putPet = async (req, res, next) => {
+    const id = req.params.id;
+    const { name, dob, species, gender, filename, kids_comp, pets_comp, description } = req.body;
+    try {
+        await petService.putPet(id, name, dob, species, gender, filename, kids_comp, pets_comp, description);
+        res.sendStatus(202);
+        next();
+    } catch (e) {
+        console.log(e.message);
+        res.sendStatus(500) && next(error);
+    }
+};
+
 module.exports = {
     postPet,
     getPets,
     getPetById,
     deletePetById,
+    putPet
 };

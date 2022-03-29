@@ -4,9 +4,9 @@ const { petDb } = require("../db");
  * if you need to make calls to additional tables, data stores (Redis, for example),
  * or call an external endpoint as part of creating the blogpost, add them to this service
  */
-const createPet = async (name, species, gender) => {
+const createPet = async (name, dob, species, gender, filename, kids_comp, pets_comp, description) => {
     try {
-        return await petDb.insertPet(name, species, gender);
+        return await petDb.insertPet(name, dob, species, gender, filename, kids_comp, pets_comp, description);
     } catch (e) {
         throw new Error(e.message);
     }
@@ -40,9 +40,18 @@ const deletePetById = async (id) => {
     }
 };
 
+const putPet = async (id, name, dob, species, gender, filename, kids_comp, pets_comp, description) => {
+    try {
+        return await petDb.putPet(id, name, dob, species, gender, filename, kids_comp, pets_comp, description);
+    } catch (e) {
+        throw new Error(e.message);
+    }
+};
+
 module.exports = {
     createPet,
     getPets,
     getPetById,
     deletePetById,
+    putPet
 };

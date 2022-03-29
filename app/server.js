@@ -12,12 +12,13 @@ var corsOptions = {
     optionsSuccessStatus: 200 // For legacy browser support
 }
 app.use(cors(corsOptions));
+app.use(express.static('uploads'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.send("App is working"));
 
-app.use("/api", routes);
+app.use("/", routes);
 
 // perform a database connection when the server starts
 dbo.connectToServer(function (err) {

@@ -1,10 +1,15 @@
 const dbo = require("../config/conn");
 var ObjectId = require("mongodb").ObjectId;
-const insertPet = async (name, species, gender) => {
+const insertPet = async (name, dob, species, gender, filename, kids_comp, pets_comp, description) => {
     const pet = {
         name: name,
+        dob: dob,
         species: species,
         gender: gender,
+        filename: filename,
+        kids_comp: kids_comp,
+        pets_comp: pets_comp,
+        description: description,
         last_modified: new Date(),
     };
     const dbConnect = dbo.getDb();
@@ -52,9 +57,39 @@ const deletePetById = async (id) => {
     });
 };
 
+const putPet =async (id, name, dob, species, gender, filename, kids_comp, pets_comp, description) => {
+    const dbConnect = dbo.getDb();
+    var o_id = new ObjectId(id);
+    const pet = {
+        name: name,
+        dob: dob,
+        species: species,
+        gender: gender,
+        filename: filename,
+        kids_comp: kids_comp,
+        pets_comp: pets_comp,
+        description: description,
+        last_modified: new Date(),
+    };
+    dbConnect.collection("pets").updateOne(
+        { _id: o_id },
+        { $set: pet },
+        { upsert: true }, 
+        function (err, result) {
+        if (err) {
+            console.log("Error updating pet!");
+        } else {
+            console.log(`Updated pet with id ${id}`);
+            console.log(`Updated pet with id ${name}`);
+         
+        }
+    });
+};
+
 module.exports = {
     insertPet,
     getPets,
     getPetById,
     deletePetById,
+    putPet
 };
