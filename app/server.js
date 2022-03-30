@@ -8,7 +8,7 @@ var cors = require('cors')
 
 
 var corsOptions = {
-    origin: 'http://localhost:3001',
+    origin: 'http://localhost:3000',
     optionsSuccessStatus: 200 // For legacy browser support
 }
 app.use(cors(corsOptions));
@@ -29,7 +29,7 @@ dbo.connectToServer(function (err) {
 
     // start the Express server
     app.listen(3001, () => {
-        console.log(`Server is running on port: 3000`);
+        console.log(`Server is running on port: 3001`);
     });
 });
 
