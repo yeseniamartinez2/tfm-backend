@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
-const connectionString = process.env.MONGO_URL_LOCAL;
+const connectionString = "mongodb://admin:password@localhost:27017";
 console.log("🚀 ~ file: conn.js ~ line 4 ~ connectionString", connectionString);
 const client = new MongoClient(connectionString, {
     useNewUrlParser: true,
