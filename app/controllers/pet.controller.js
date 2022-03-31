@@ -1,7 +1,7 @@
 const { petService } = require("../services");
 
 /*
- * call other imported services, or same service but different functions here if you need to
+ * call other imported services, or same service but different functions here 
  */
 const postPet = async (req, res, next) => {
     const { name, dob, species, gender, filename, kids_comp, pets_comp, description } = req.body;
