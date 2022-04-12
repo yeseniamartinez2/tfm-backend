@@ -1,23 +1,10 @@
 #!/usr/bin/env bash
 
-echo "
-----------------------
-  NODE & NPM
-----------------------
-"
-
 # add nodejs 10 ppa (personal package archive) from nodesource
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 
 # install nodejs and npm
 sudo apt-get install -y nodejs
-
-
-echo "
-----------------------
-  MONGODB
-----------------------
-"
 
 # import mongodb 4.0 public gpg key
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
@@ -37,35 +24,14 @@ sudo systemctl start mongod
 # set mongodb to start automatically on system startup
 sudo systemctl enable mongod
 
-
-echo "
-----------------------
-  PM2
-----------------------
-"
-
 # install pm2 with npm
 sudo npm install -g pm2
 
 # set pm2 to start automatically on system startup
 sudo pm2 startup systemd
 
-
-echo "
-----------------------
-  NGINX
-----------------------
-"
-
 # install nginx
 sudo apt-get install -y nginx
-
-
-echo "
-----------------------
-  UFW (FIREWALL)
-----------------------
-"
 
 # allow ssh connections through firewall
 sudo ufw allow OpenSSH
