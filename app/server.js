@@ -5,7 +5,7 @@ const routes = require("./routes");
 const dbo = require("./config/conn");
 const { auth } = require('express-oauth2-jwt-bearer');
 require("dotenv").config();
-var cors = require('cors')
+var cors = require('cors');  
 
 
 var corsOptions = {
@@ -37,8 +37,10 @@ dbo.connectToServer(function (err) {
     // start the Express server
     app.listen(process.env.PORT || 3001, () => {
         console.log(`Server is running on port: 3001`);
-    });
+    });   
 });
+
+
 
 module.exports = {
     app,
